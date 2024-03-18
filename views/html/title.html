@@ -1,0 +1,41 @@
+<div>    
+    <div>
+        <em class="title"></em>
+    </div>
+</div>
+<script>
+    function writeMachine(){
+        const title=document.querySelector('.title');
+
+        const handler=(word)=>new Promise( (resolve,rejected)=>{
+                title.textContent=word;
+                title.classList.remove('typeoff');   
+                title.classList.add('type');
+                
+                setTimeout(() => {
+                    title.classList.remove('type');
+                    title.classList.add('typeoff');
+                    setTimeout(() => {
+                        resolve();
+                    }, 2000);
+                }, 2000);
+        })
+
+        handler('Caninos')
+            .then(result=>{
+                return handler('Felinos')
+            })
+            .then(result=>{
+                return handler('Zarigüeyas')
+            })
+            .then(result=>{
+                return handler('Aves')
+            })
+            .then(result=>{
+                writeMachine()
+            }
+            )
+
+    }
+    writeMachine();
+</script>
